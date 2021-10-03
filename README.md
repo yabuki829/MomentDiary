@@ -22,8 +22,7 @@
 
 # <画像4　日記投稿画面>
 <div align="center">
-<img width="337" alt="スクリーンショット 2021-09-23 11 29 17" src="https://user-images.githubusercontent.com/67153136/134446672-4df1f7a9-014a-4d00-bf4b-720dadb92a5e.png">
-
+<img width="330" alt="スクリーンショット 2021-09-23 19 46 58" src="https://user-images.githubusercontent.com/67153136/135755682-5c4ad993-5467-4998-a434-e4a35ab31448.png">
 </div>
 
 
