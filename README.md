@@ -22,9 +22,9 @@
 
 # <画像4　日記投稿画面>
 <div align="center">
-![Simulator Screen Shot - iPhone 12 Pro Max - 2021-10-03 at 22 32 56](https://user-images.githubusercontent.com/67153136/135755863-839116a5-a339-4d53-8e54-612c8bc7061d.png)
+<img width="377" alt="スクリーンショット 2021-10-03 22 35 32" src="https://user-images.githubusercontent.com/67153136/135755954-75574091-8710-4f2c-a864-5e9e31cb4482.png">
 
-  
+
 </div>
 
 
