@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5JY-ke-4zx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jtf-SI-DDX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -28,22 +28,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日付" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YN6-q5-5zG">
-                                            <rect key="frame" x="20" y="11" width="274" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="日付" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YN6-q5-5zG">
+                                            <rect key="frame" x="25" y="21" width="36" height="25"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最後の投稿内容" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8i-z0-cVo">
-                                            <rect key="frame" x="20" y="40" width="374" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="最後の投稿内容" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8i-z0-cVo">
+                                            <rect key="frame" x="40" y="51" width="334" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="e8i-z0-cVo" firstAttribute="top" secondItem="YN6-q5-5zG" secondAttribute="bottom" id="KGc-Jk-bOa"/>
+                                        <constraint firstItem="YN6-q5-5zG" firstAttribute="leading" secondItem="x1s-Mi-5MY" secondAttribute="leadingMargin" constant="5" id="KbI-bl-sIs"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="e8i-z0-cVo" secondAttribute="trailing" constant="20" id="RVt-oe-rSO"/>
+                                        <constraint firstItem="e8i-z0-cVo" firstAttribute="leading" secondItem="x1s-Mi-5MY" secondAttribute="leadingMargin" constant="20" id="XKN-qE-93p"/>
+                                        <constraint firstAttribute="bottom" secondItem="e8i-z0-cVo" secondAttribute="bottom" constant="5" id="in7-Yo-Cie"/>
+                                        <constraint firstItem="YN6-q5-5zG" firstAttribute="top" secondItem="x1s-Mi-5MY" secondAttribute="topMargin" id="vhC-UR-ZF4"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -52,12 +58,13 @@
                         <barButtonItem key="backBarButtonItem" title="ホーム" id="bRC-9j-pln"/>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" systemItem="compose" id="PmV-t8-xDm">
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="diarytimeButton:" destination="BYZ-38-t0r" id="KnM-tJ-6xT"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem style="plain" systemItem="refresh" id="iye-T9-nRb">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="reverse:" destination="BYZ-38-t0r" id="Dqy-Iy-kbt"/>
                                 </connections>
@@ -87,26 +94,26 @@
                                 <textInputTraits key="textInputTraits" keyboardAppearance="light"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j1e-2K-fQu">
-                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <rect key="frame" x="10" y="142" width="394" height="744"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" systemColor="systemGray6Color"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell2" rowHeight="91" id="5FN-5b-Q2w">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="91"/>
+                                        <rect key="frame" x="0.0" y="28" width="394" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5FN-5b-Q2w" id="Wfr-eS-7jJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="91"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfZ-15-pKE">
-                                                    <rect key="frame" x="10" y="0.0" width="104" height="91"/>
+                                                    <rect key="frame" x="10" y="0.0" width="84" height="91"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-xd-J7X">
-                                                    <rect key="frame" x="124" y="0.0" width="270" height="91"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-xd-J7X">
+                                                    <rect key="frame" x="104" y="0.0" width="270" height="91"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -135,17 +142,18 @@
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="j1e-2K-fQu" secondAttribute="bottom" id="GVc-w8-AWB"/>
-                            <constraint firstItem="j1e-2K-fQu" firstAttribute="top" secondItem="2oW-nl-Yxf" secondAttribute="bottom" constant="8" symbolic="YES" id="Mc5-u9-xiu"/>
-                            <constraint firstAttribute="trailing" secondItem="j1e-2K-fQu" secondAttribute="trailing" id="Wl3-Rb-w9S"/>
+                            <constraint firstItem="j1e-2K-fQu" firstAttribute="leading" secondItem="P2v-uJ-Twe" secondAttribute="leading" constant="10" id="KnS-RP-pE4"/>
+                            <constraint firstItem="P2v-uJ-Twe" firstAttribute="trailing" secondItem="j1e-2K-fQu" secondAttribute="trailing" constant="10" id="VFe-JG-Aza"/>
+                            <constraint firstAttribute="bottom" secondItem="j1e-2K-fQu" secondAttribute="bottom" constant="10" id="Yls-bv-Hbf"/>
                             <constraint firstItem="2oW-nl-Yxf" firstAttribute="top" secondItem="P2v-uJ-Twe" secondAttribute="top" constant="10" id="aDA-jr-9ws"/>
-                            <constraint firstItem="j1e-2K-fQu" firstAttribute="leading" secondItem="P2v-uJ-Twe" secondAttribute="leading" id="kKT-aP-Oif"/>
                             <constraint firstItem="P2v-uJ-Twe" firstAttribute="trailing" secondItem="2oW-nl-Yxf" secondAttribute="trailing" constant="15" id="tf4-Xq-S1X"/>
                             <constraint firstItem="2oW-nl-Yxf" firstAttribute="leading" secondItem="P2v-uJ-Twe" secondAttribute="leading" constant="15" id="up6-Ne-Xow"/>
+                            <constraint firstItem="j1e-2K-fQu" firstAttribute="top" secondItem="2oW-nl-Yxf" secondAttribute="bottom" constant="10" id="ysh-JX-8LX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MtV-fA-lYt" colorLabel="IBBuiltInLabel-Blue">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="refresh" id="2yu-Py-eRg">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="reverse:" destination="NDj-dQ-rRq" id="RH9-LM-aap"/>
                             </connections>
@@ -173,13 +181,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="NotoSansOriya" family="Noto Sans Oriya" pointSize="20"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -191,26 +199,8 @@
             </objects>
             <point key="canvasLocation" x="3344.9275362318845" y="75.669642857142847"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="zkV-ac-Xif">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="5JY-ke-4zx" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pm2-6R-TxA">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Jtf-SI-DDX" kind="relationship" relationship="viewControllers" id="vCf-XM-Eep"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IFy-M8-chO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2434.7826086956525" y="75.669642857142847"/>
-        </scene>
     </scenes>
-    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="book" catalog="system" width="128" height="102"/>
         <systemColor name="systemGray3Color">
@@ -221,9 +211,6 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
