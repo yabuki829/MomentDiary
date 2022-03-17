@@ -30,6 +30,8 @@ class PostDiaryModel{
 //    全ての日記を読み込む
     func readDiary(){
         if let TimeAndDiaryList = userDefaults.array(forKey: "TimeAndDiaryList") as? [[String]]{
+            print("読み込みました")
+            print(TimeAndDiaryList)
             DiaryArray.append(contentsOf: TimeAndDiaryList)
         }
     }

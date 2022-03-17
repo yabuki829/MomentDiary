@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "EfZ-15-pKE"; */
+"EfZ-15-pKE.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Moment Memo Diary"; ObjectID = "Mhc-bQ-gmx"; */
+"Mhc-bQ-gmx.title" = "瞬间日记";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XyK-xd-J7X"; */
+"XyK-xd-J7X.text" = "Label";
+
+/* Class = "UILabel"; text = "日付"; ObjectID = "YN6-q5-5zG"; */
+"YN6-q5-5zG.text" = "日付";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "bRC-9j-pln"; */
+"bRC-9j-pln.title" = "返回";
+
+/* Class = "UILabel"; text = "最後の投稿内容"; ObjectID = "e8i-z0-cVo"; */
+"e8i-z0-cVo.text" = "最後の投稿内容";
+
+/* Class = "UITabBarItem"; title = "日記"; ObjectID = "fhc-5f-dRp"; */
+"fhc-5f-dRp.title" = "瞬间日记";

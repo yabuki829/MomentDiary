@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NendAd
 
 class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationControllerDelegate {
    
@@ -14,6 +15,7 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var nadView: NADView!
     //日付
     var timeString = String()
 
@@ -26,13 +28,13 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         textField.delegate = self
         navigationController?.delegate = self
         self.navigationItem.title = timeString
-        self.navigationController?.navigationBar.titleTextAttributes
-            = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                NSAttributedString.Key.font: UIFont(name: "Times New Roman", size: 15)!]
-        self.navigationController?.navigationBar.tintColor = UIColor.white;
+       
         tableView.layer.cornerRadius = 10
+        setNavBarBackgroundColor()
         postModel.readDiary()
         postModel.filterDiary(date: timeString)
+        addAD()
+      
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
           self.view.endEditing(true)
@@ -46,6 +48,16 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         postModel.filterDiaryArray.reverse()
         tableView.reloadData()
     }
+    func setNavBarBackgroundColor(){
+        setStatusBarBackgroundColor(.salmon())
+        self.navigationController?.navigationBar.barTintColor = .salmon()
+            self.navigationController?.navigationBar.tintColor = .white
+            // ナビゲーションバーのテキストを変更する
+        self.navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont(name: "Times New Roman", size: 15)!]
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
+        }
 }
 
 extension NextViewController:UITableViewDelegate,UITableViewDataSource{
@@ -64,6 +76,7 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text?.isEmpty == true {
+            textField.resignFirstResponder()
             return true
         }
         let time = postModel.getPostTime()
@@ -78,17 +91,11 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath)
 
         
-        
-        
         let timeCelllabel = cell.viewWithTag(3) as! UILabel
         let diaryTextlabel = cell.viewWithTag(2) as! UILabel
        
         diaryTextlabel.text = postModel.filterDiaryArray[indexPath.row][1]
         timeCelllabel.text = postModel.filterDiaryArray[indexPath.row][2]
-        timeCelllabel.layer.shadowColor = UIColor.darkGray.cgColor
-        timeCelllabel.layer.shadowRadius = 1
-        timeCelllabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        timeCelllabel.layer.shadowOpacity = 0.5
         return cell
     }
     //セルが選択されたら
@@ -111,3 +118,14 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
 
 
 
+
+extension NextViewController:NADViewDelegate{
+    func addAD(){
+        //本番広告
+        nadView.setNendID(1046091, apiKey: "8d695dbd2fcbbb62629e9317d17bc366029d00a4")
+        //テスト広告
+//        nadView.setNendID(3172, apiKey: "a6eca9dd074372c898dd1df549301f277c53f2b9")
+        nadView.delegate = self
+        nadView.load()
+    }
+}
