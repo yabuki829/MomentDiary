@@ -27,10 +27,11 @@ class ViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         seachBar.delegate = self
+        seachBar.setShowsCancelButton(false, animated: true)
         tableView.layer.cornerRadius = 10
         setNavBarBackgroundColor()
         addAD()
-       
+        setting()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +98,40 @@ class ViewController: UIViewController{
         // 結果表示
         return str
     }
-    
+   
+    func setting(){
+        
+        let toolbar = UIToolbar()
+        //完了ボタンを右寄せにする為に、左側を埋めるスペース作成
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                          target: nil,
+                                          action: nil)
+        let done = UIBarButtonItem(title: "Done",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(didTapDoneButton))
+
+        //toolbarのitemsに作成したスペースと完了ボタンを入れる。実際にも左から順に表示される。
+        toolbar.items = [space, done]
+        toolbar.sizeToFit()
+
+        seachBar.searchTextField.inputAccessoryView = toolbar
+        seachBar.inputAccessoryView = toolbar
+
+    }
+    @objc func didTapDoneButton() {
+        seachBar.searchTextField.resignFirstResponder()
+        seachBar.setShowsCancelButton(false, animated: true)
+     }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar){
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    // キャンセルボタンでキャセルボタン非表示
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
 }
 
 
@@ -126,7 +160,6 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "next") as! NextViewController
         nextVC.timeString =  diaryModel.diaryTime[indexPath.row]
-        
         navigationController!.pushViewController(nextVC, animated: true)
         
         isSeach = false

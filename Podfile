@@ -8,8 +8,6 @@ target 'diary-app' do
   # Pods for diary-app
 
   pod 'NendSDK_iOS'
-  pod 'RxSwift'
-  pod 'RxCocoa'
   target 'diary-appTests' do
     inherit! :search_paths
     # Pods for testing
