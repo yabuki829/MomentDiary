@@ -57,11 +57,7 @@ class ViewController: UIViewController{
     
     
     
-    @IBAction func reverse(_ sender: Any) {
-        diaryModel.isTurn = !diaryModel.isTurn
-        diaryModel.diaryTime.reverse()  
-        tableView.reloadData()
-    }
+
     func setNavBarBackgroundColor(){
         setStatusBarBackgroundColor(.salmon())
         self.navigationController?.navigationBar.barTintColor = .salmon()

@@ -4,12 +4,7 @@ class DiaryModel{
     let userDefaults = UserDefaults.standard
     //日付が入ってる
     var diaryTime = [String]()
-    var dateArray = [Date]()
     var isTurn = false
-    
-    // [["2021年10月31日(日)", "ハロウィーン", "14:15"],
-//       ["2021年11月02日(火)", "一瞬で日記が書ける", "14:16"],
-//       ["2021年11月02日(火)", "だから三日坊主にならない", "14:16"]]
     var data = [[String]]()
     
     func getDate() ->String{
@@ -67,6 +62,7 @@ class DiaryModel{
         // 結果表示
         return str
     }
+    //日付の追加
     func saveDate(saveData:String) -> Bool{
         for i in 0..<diaryTime.count{
             if diaryTime[i] == saveData{
@@ -85,7 +81,7 @@ class DiaryModel{
         return false
     }
 
-    
+//    日付の読み取り
     func readDateData() -> [String]{
         if let diaryList = userDefaults.array(forKey: "diaryList") as? [String] {
             diaryTime = []
@@ -95,6 +91,8 @@ class DiaryModel{
         return diaryTime
     }
     
+    
+//    日記の読み取り
     func readDiaryDate() -> [[String]] {
         if let TimeAndDiaryList = userDefaults.array(forKey: "TimeAndDiaryList") as? [[String]]{
             data = []
@@ -104,7 +102,8 @@ class DiaryModel{
         }
         return data
     }
-
+    //日記の削除機能　一日の日記を削除する
+    //3月22日の日記を削除する
     func deleteDiary(index:Int){
         let deleteData = data.filter { ($0.first) ==  diaryTime[index]}
       
@@ -113,13 +112,15 @@ class DiaryModel{
         userDefaults.set(data, forKey: "TimeAndDiaryList")
         userDefaults.set(diaryTime, forKey: "diaryList")
     }
+    
+    
+    //日記の検索機能
     func searchDiary(text:String) -> [[String]]{
         data = readDiaryDate()
         var filterDiary = [[String]]()
         print(text,"と同じものを探します")
         for i in 0..<data.count{
             if data[i][1].lowercased().contains(text){
-                
                 filterDiary.append(data[i])
             }
         }
@@ -131,4 +132,27 @@ class DiaryModel{
 
 
 
-
+/*
+ 
+ 配列
+ -diaryTimeについて id diaryList
+      diaryTime は　日記を投稿した日付が入っている
+    ["2022年03月03日(月)","2022年03月04日(火)"]
+ 
+-TimeAndDiaryList について
+    　TimeAndDiaryList　は日記の投稿日時 投稿内容　投稿時間が入っている。
+ [
+     ["2022年03月18日(金)", "ああああ", "16:37"],
+     ["2022年03月18日(金)", "いいいいい", "16:37"],
+     ["2022年03月18日(金)", "うううう", "16:37"],
+     ["2022年03月18日(金)", "ええええ", "16:37"],
+    ["2022年03月18日(金)", "画像タイトル", "画像","0"]　　//　投稿日時 画像のタイトル　画像　画像配列の番号
+ ]
+ 
+-なぜDate型を使ってないのかというと
+    　このアプリは高校生の時に作成したアプリで当時Date型での実装方法がわからなかったためStringの日時を使っている。
+    　リリースする時に変更しても良かったが、初めて作った高校生の時に初めて作ったプログラムだったので思い出深く実装に時間がかかったので変更したくなかった。
+ 
+    　今後扱いやすいようにData型で実装し追加機能の画像投稿機能を加えて別のアプリとしてリリースしようと思う。
+ 
+ */

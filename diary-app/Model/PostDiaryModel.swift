@@ -24,6 +24,26 @@ class PostDiaryModel{
         filterDiary(date: date)
         saveDiary()
     }
+    //画像があるときの投稿機能
+    func postDiaryWithImage(date:String,title:String,imgInt:String){
+        let num = DiaryArray.count
+        DiaryArray.append([])
+        if title == ""{
+            DiaryArray[num].append(date)
+            DiaryArray[num].append("画像")//画像の名前
+            DiaryArray[num].append("画像")
+            DiaryArray[num].append(imgInt)
+        }
+        else{
+            DiaryArray[num].append(date)
+            DiaryArray[num].append(title)
+            DiaryArray[num].append("画像")
+            DiaryArray[num].append(imgInt)
+        }
+       
+        filterDiary(date: date)
+        saveDiary()
+    }
     func saveDiary(){
         userDefaults.set(DiaryArray, forKey: "TimeAndDiaryList")
     }
@@ -44,11 +64,27 @@ class PostDiaryModel{
     }
     
     func deleteSentence(row:Int,date:String){
+        print("削除します")
         for num in 0..<DiaryArray.count{
-            if filterDiaryArray[row][1] == DiaryArray[num][1] {
-                DiaryArray.remove(at: num)
-                break
+            //削除するのが画像の場合
+            if filterDiaryArray[row][2] == "画像" && DiaryArray[num][2] == "画像"{
+                print("--------------------------")
+                print(filterDiaryArray[row])
+                print(filterDiaryArray[num])
+                print("--------------------------")
+                if filterDiaryArray[row][3]  == DiaryArray[num][3]{
+                    DiaryArray.remove(at: num)
+                    break
+                }
             }
+            //画像でない場合
+            else{
+                if filterDiaryArray[row][1] == DiaryArray[num][1] {
+                    DiaryArray.remove(at: num)
+                    break
+                }
+            }
+            
         }
         filterDiaryArray = DiaryArray.filter { ($0.first) ==  date }
         if  isTurn == true{
@@ -57,4 +93,3 @@ class PostDiaryModel{
         userDefaults.set(DiaryArray, forKey: "TimeAndDiaryList")
     }
 }
-

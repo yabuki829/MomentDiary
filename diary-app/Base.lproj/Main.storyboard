@@ -70,7 +70,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KDZ-kh-4xZ"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="4Wc-7e-912" secondAttribute="bottom" id="1pk-y6-i2c"/>
                             <constraint firstItem="4Wc-7e-912" firstAttribute="top" secondItem="TLy-iI-9qu" secondAttribute="bottom" id="56R-LG-BSL"/>
@@ -86,20 +86,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MomentDiary" id="i42-EG-FWb">
-                        <rightBarButtonItems>
-                            <barButtonItem image="square.and.pencil" catalog="system" id="nfP-e5-PMo">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="diarytimeButton:" destination="F2Z-aV-0Wf" id="KHq-jm-Qvu"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="Iu9-kr-5ka">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="reverse:" destination="F2Z-aV-0Wf" id="bCd-S9-JaD"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="square.and.pencil" catalog="system" id="nfP-e5-PMo">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="diarytimeButton:" destination="F2Z-aV-0Wf" id="KHq-jm-Qvu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="nadView" destination="4Wc-7e-912" id="9PQ-bJ-KjO"/>
@@ -121,8 +113,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oW-nl-Yxf">
-                                <rect key="frame" x="15" y="98" width="384" height="34"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <rect key="frame" x="15" y="98" width="349" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="systemGray6Color"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardAppearance="light"/>
@@ -145,14 +137,14 @@
                                                         <constraint firstAttribute="width" constant="80" id="Nhw-or-xyt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-xd-J7X">
                                                     <rect key="frame" x="105" y="0.0" width="289" height="91"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -170,6 +162,27 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="118" id="WZl-Au-5eL">
+                                        <rect key="frame" x="0.0" y="119" width="414" height="118"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WZl-Au-5eL" id="PaK-qh-SCa">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="akj-um-lBf">
+                                                    <rect key="frame" x="10" y="16" width="394" height="86"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="akj-um-lBf" firstAttribute="centerY" secondItem="PaK-qh-SCa" secondAttribute="centerY" id="JLX-8S-gdi"/>
+                                                <constraint firstAttribute="trailing" secondItem="akj-um-lBf" secondAttribute="trailing" constant="10" id="MUU-AA-8DM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="akj-um-lBf" secondAttribute="bottom" constant="5" id="U5U-MC-olZ"/>
+                                                <constraint firstItem="akj-um-lBf" firstAttribute="centerX" secondItem="PaK-qh-SCa" secondAttribute="centerX" id="gHg-tR-qLV"/>
+                                                <constraint firstItem="akj-um-lBf" firstAttribute="leading" secondItem="PaK-qh-SCa" secondAttribute="leading" constant="10" id="onr-fA-UqG"/>
+                                                <constraint firstItem="akj-um-lBf" firstAttribute="top" secondItem="PaK-qh-SCa" secondAttribute="topMargin" constant="5" id="p7M-K3-mYf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJ7-1o-98M" customClass="NADView">
@@ -180,18 +193,31 @@
                                     <constraint firstAttribute="width" constant="320" id="uph-80-XS1"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxo-ao-tLX">
+                                <rect key="frame" x="369" y="98" width="35" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="QeO-k3-Z6c"/>
+                                </constraints>
+                                <state key="normal" title="画像">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectImage:" destination="NDj-dQ-rRq" eventType="touchUpInside" id="kmz-yA-K0O"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="P2v-uJ-Twe"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="vJ7-1o-98M" firstAttribute="top" secondItem="j1e-2K-fQu" secondAttribute="bottom" id="F8K-db-YCo"/>
+                            <constraint firstItem="cxo-ao-tLX" firstAttribute="top" secondItem="P2v-uJ-Twe" secondAttribute="top" constant="10" id="GJg-Lz-fa8"/>
                             <constraint firstAttribute="bottom" secondItem="vJ7-1o-98M" secondAttribute="bottom" id="IMz-l8-RIO"/>
                             <constraint firstItem="j1e-2K-fQu" firstAttribute="leading" secondItem="P2v-uJ-Twe" secondAttribute="leading" id="KnS-RP-pE4"/>
                             <constraint firstItem="P2v-uJ-Twe" firstAttribute="trailing" secondItem="j1e-2K-fQu" secondAttribute="trailing" id="Yb9-wZ-LWJ"/>
                             <constraint firstItem="2oW-nl-Yxf" firstAttribute="top" secondItem="P2v-uJ-Twe" secondAttribute="top" constant="10" id="aDA-jr-9ws"/>
                             <constraint firstItem="vJ7-1o-98M" firstAttribute="centerX" secondItem="SIx-5S-2jh" secondAttribute="centerX" id="d8t-5b-qBP"/>
-                            <constraint firstItem="P2v-uJ-Twe" firstAttribute="trailing" secondItem="2oW-nl-Yxf" secondAttribute="trailing" constant="15" id="tf4-Xq-S1X"/>
+                            <constraint firstItem="cxo-ao-tLX" firstAttribute="leading" secondItem="2oW-nl-Yxf" secondAttribute="trailing" constant="5" id="fvu-HQ-zFC"/>
+                            <constraint firstItem="P2v-uJ-Twe" firstAttribute="trailing" secondItem="cxo-ao-tLX" secondAttribute="trailing" constant="10" id="nHY-3m-9Y7"/>
                             <constraint firstItem="2oW-nl-Yxf" firstAttribute="leading" secondItem="P2v-uJ-Twe" secondAttribute="leading" constant="15" id="up6-Ne-Xow"/>
                             <constraint firstItem="j1e-2K-fQu" firstAttribute="top" secondItem="2oW-nl-Yxf" secondAttribute="bottom" constant="10" id="ysh-JX-8LX"/>
                         </constraints>
@@ -212,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYZ-vp-kfp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6110" y="72"/>
+            <point key="canvasLocation" x="6108.6956521739139" y="71.651785714285708"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NOx-mk-noG">
@@ -250,9 +276,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -174,4 +174,16 @@ extension UIColor {
        class func nickel() -> UIColor {
            return UIColor(red:128/255, green:128/255, blue:128/255, alpha:1.0)
        }
+    
+}
+
+
+extension UIImage {
+    func resized(toWidth width: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
 }
