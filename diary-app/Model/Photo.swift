@@ -11,7 +11,7 @@ import UIKit
 
 class Photo {
     
-    var imageArray = [NSData]()
+    var imageArray = [Data]()
     let userdefalts = UserDefaults.standard
     func checkPermission(){
            let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
@@ -40,7 +40,7 @@ class Photo {
            }
        }
     func saveImage(image:UIImage){
-        let data = image.pngData() as NSData?
+        let data = image.pngData() as Data?
         print("何バイト？　",data!.count)
     
             if let imageData = data {
@@ -48,12 +48,15 @@ class Photo {
                 userdefalts.set(imageArray, forKey: "image")
             }
     }
-    func getImage() -> [NSData]{
+    func save(array:[Data]){
+        userdefalts.set(array, forKey: "image")
+    }
+    func getImage() -> [Data]{
         if let image = userdefalts.object(forKey: "image"){
-            imageArray = image as! [NSData]
+            imageArray = image as! [Data]
             return imageArray
         }
-        return [NSData]()
+        return [Data]()
     }
   
 }

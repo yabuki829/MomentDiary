@@ -127,9 +127,9 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if postModel.filterDiaryArray[indexPath.row][2] == "画像"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-//            cell.backgroundColor = .black
             let imageView = cell.viewWithTag(1) as! UIImageView
             let i = Int(postModel.filterDiaryArray[indexPath.row][3])
+            
             imageView.image = UIImage(data: photo.getImage()[i ?? 0] as Data)?.resized(toWidth: view.bounds.size.width)
             return cell
         }

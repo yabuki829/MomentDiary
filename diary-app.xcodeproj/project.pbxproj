@@ -12,6 +12,7 @@
 		708AD3932709D822002D5201 /* PostDiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708AD3922709D822002D5201 /* PostDiaryModel.swift */; };
 		709F88D62625A1B30058DCA6 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709F88D52625A1B30058DCA6 /* NextViewController.swift */; };
 		70BBE34427E97B2300C9BA09 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BBE34327E97B2300C9BA09 /* Photo.swift */; };
+		70C3B17D27FAC5DF00E2A320 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3B17C27FAC5DF00E2A320 /* ImageViewController.swift */; };
 		70C945DD26257A270074F829 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C945DC26257A270074F829 /* AppDelegate.swift */; };
 		70C945DF26257A270074F829 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C945DE26257A270074F829 /* SceneDelegate.swift */; };
 		70C945E126257A270074F829 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C945E026257A270074F829 /* ViewController.swift */; };
@@ -53,6 +54,7 @@
 		708AD3922709D822002D5201 /* PostDiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDiaryModel.swift; sourceTree = "<group>"; };
 		709F88D52625A1B30058DCA6 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		70BBE34327E97B2300C9BA09 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		70C3B17C27FAC5DF00E2A320 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		70C945D926257A270074F829 /* diary-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "diary-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C945DC26257A270074F829 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70C945DE26257A270074F829 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				70C945E026257A270074F829 /* ViewController.swift */,
 				709F88D52625A1B30058DCA6 /* NextViewController.swift */,
+				70C3B17C27FAC5DF00E2A320 /* ImageViewController.swift */,
 			);
 			path = Contoroller;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70BBE34427E97B2300C9BA09 /* Photo.swift in Sources */,
+				70C3B17D27FAC5DF00E2A320 /* ImageViewController.swift in Sources */,
 				70C945E126257A270074F829 /* ViewController.swift in Sources */,
 				709F88D62625A1B30058DCA6 /* NextViewController.swift in Sources */,
 				70C945DD26257A270074F829 /* AppDelegate.swift in Sources */,
