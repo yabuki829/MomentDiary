@@ -21,9 +21,10 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     //日付
     var timeString = String()
-    let postModel = PostDiaryModel()
+    let diaryModel = Diary()
     let photo = Photo()
-
+    var diaryArray = diary(id: String(), created: Date(), diary: [diaryData]())
+    var index = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +32,12 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         tableView.dataSource = self
         textField.delegate = self
         navigationController?.delegate = self
-        self.navigationItem.title = timeString
+        self.navigationItem.title =  diaryArray.created.covertString()
         setNavBarBackgroundColor()
-        postModel.readDiary()
-        postModel.filterDiary(date: timeString)
-//        addAD()
         tableView.keyboardDismissMode = .none
-      
-       
         tableView.contentInsetAdjustmentBehavior = .never
+        textField.becomeFirstResponder()
+        textField.borderStyle = .roundedRect
     }
     
     
@@ -59,11 +57,6 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
     }
     override func didReceiveMemoryWarning() {
            super.didReceiveMemoryWarning()
-       }
-    @IBAction func reverse(_ sender: Any) {
-        postModel.isTurn = !postModel.isTurn
-        postModel.filterDiaryArray.reverse()
-        tableView.reloadData()
     }
     
     @IBAction func selectImage(_ sender: Any) {
@@ -108,13 +101,6 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         stackViewBottomConstraint.constant = 0
         tableViewBottomConstraint.constant = 0
     }
-
-
-        
-    @objc func didTapDoneButton() {
-        textField.resignFirstResponder()
-     }
-    
     func deleteAlert(){
         let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok", style: .cancel, handler: { (action) -> Void in
@@ -126,13 +112,13 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
 
 extension NextViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postModel.filterDiaryArray.count
+        return diaryArray.diary!.count
 
     }
   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let aa = postModel.filterDiaryArray[indexPath.row][1]
-        if aa.utf16.count > 20  || postModel.filterDiaryArray[indexPath.row][2] == "画像" {
+        let aa = diaryArray.diary![indexPath.row].text
+        if aa.utf16.count > 20  || diaryArray.diary![indexPath.row].image!.isEmpty == false {
             return  UITableView.automaticDimension
         }
         return  view.frame.height/12
@@ -143,31 +129,39 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
             textField.resignFirstResponder()
             return true
         }
-        let time = postModel.getPostTime()
-        postModel.postDiary(time: time, date: timeString, diary: textField.text!)
-        textField.text = ""
+        let data = diaryData(id: diaryModel.generateID(5), date: Date(), text: textField.text!, image: Data())
+        diaryArray.diary!.append(data)
         
+        var array = diaryModel.read()
+        array[index].diary = diaryArray.diary
+        diaryModel.save(data: array)
+        
+        textField.text = ""
         tableView.reloadData()
         
         return true
     }
     //セルを作成
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if postModel.filterDiaryArray[indexPath.row][2] == "画像"{
+        if diaryArray.diary![indexPath.row].image!.isEmpty == false{
+            print("画像")
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.selectionStyle = .none
             let imageView = cell.viewWithTag(1) as! UIImageView
-            let i = Int(postModel.filterDiaryArray[indexPath.row][3])
-            
-            imageView.image = UIImage(data: photo.getImage()[i ?? 0] as Data)?.resized(toWidth: view.bounds.size.width)
+           
+            let image_data = diaryArray.diary![indexPath.row].image
+            imageView.image = UIImage(data: image_data!)?.resized(toWidth: view.bounds.size.width)
             return cell
         }
         else{
+            print(diaryArray.diary![indexPath.row].text)
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath)
+            cell.selectionStyle = .none
             let timeCelllabel = cell.viewWithTag(3) as! UILabel
             let diaryTextlabel = cell.viewWithTag(2) as! UILabel
            
-            diaryTextlabel.text = postModel.filterDiaryArray[indexPath.row][1]
-            timeCelllabel.text = postModel.filterDiaryArray[indexPath.row][2]
+            diaryTextlabel.text = diaryArray.diary![indexPath.row].text
+            timeCelllabel.text = diaryArray.diary![indexPath.row].date.convert_short()
             return cell
         }
 
@@ -176,22 +170,16 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
     //セルが選択されたら
     func tableView(_ tableView: UITableView,didSelectRowAt indexPath: IndexPath) {
             self.view.endEditing(true)
-//            textField.resignFirstResponder()
-            tableView.deselectRow(at: indexPath, animated: true)
-        if postModel.filterDiaryArray[indexPath.row][2] == "画像"{
-            print("画像")
-        }
-        else{
-        
-            print("日記")
-        }
-          
+            textField.resignFirstResponder()
        }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            postModel.deleteSentence(row: indexPath.row, date: timeString)
+            diaryArray.diary!.remove(at: indexPath.row)
+            var data = diaryModel.read()
+            data[index].diary = diaryArray.diary
+            diaryModel.save(data: data)
             tableView.reloadData()
            
         }
@@ -218,9 +206,21 @@ extension NextViewController:UIImagePickerControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             
-            photo.saveImage(image: image)
-            let i = photo.getImage().count - 1
-            postModel.postDiaryWithImage(date:timeString, title: textField.text!, imgInt: String(i))
+            if textField.text == ""{
+                let a = diaryData(id: diaryModel.generateID(8), date: Date(), text: "画像", image: photo.convert_data(image))
+                diaryArray.diary?.append(a)
+            }
+            else{
+                let a = diaryData(id: diaryModel.generateID(8), date: Date(), text: textField.text ?? "画像", image: photo.convert_data(image))
+                diaryArray.diary?.append(a)
+            }
+           
+           
+
+            var array = diaryModel.read()
+            array[index].diary = diaryArray.diary
+            diaryModel.save(data: array)
+            
             textField.text = ""
             tableView.reloadData()
             

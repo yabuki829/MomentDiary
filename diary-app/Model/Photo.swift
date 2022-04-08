@@ -48,6 +48,11 @@ class Photo {
                 userdefalts.set(imageArray, forKey: "image")
             }
     }
+    func convert_data(_ image:UIImage) -> Data{
+        let data = image.pngData() as Data?
+        
+        return data!
+    }
     func save(array:[Data]){
         userdefalts.set(array, forKey: "image")
     }

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		308A7A0ECABFF396224F6C08 /* Pods_diary_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D5E26D548E5AB62DA5F157 /* Pods_diary_appTests.framework */; };
-		704B009927FF2C8D006B3E2D /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704B009727FF2C8D006B3E2D /* TextFieldCell.swift */; };
-		704B009A27FF2C8D006B3E2D /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704B009827FF2C8D006B3E2D /* TextFieldCell.xib */; };
 		704CCE292707FF0600565CDC /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704CCE282707FF0600565CDC /* DiaryModel.swift */; };
 		708AD3932709D822002D5201 /* PostDiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708AD3922709D822002D5201 /* PostDiaryModel.swift */; };
 		709F88D62625A1B30058DCA6 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709F88D52625A1B30058DCA6 /* NextViewController.swift */; };
@@ -49,8 +47,6 @@
 		266706B06A0C1544037B7E41 /* Pods-diary-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diary-app.debug.xcconfig"; path = "Target Support Files/Pods-diary-app/Pods-diary-app.debug.xcconfig"; sourceTree = "<group>"; };
 		57A5B598EF1561F30AAEC2E4 /* Pods_diary_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_diary_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C34FABDF3E9FDD5B85E0E74 /* Pods-diary-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diary-app.release.xcconfig"; path = "Target Support Files/Pods-diary-app/Pods-diary-app.release.xcconfig"; sourceTree = "<group>"; };
-		704B009727FF2C8D006B3E2D /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
-		704B009827FF2C8D006B3E2D /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		704CCE282707FF0600565CDC /* DiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryModel.swift; sourceTree = "<group>"; };
 		704E56E32782E18600E52E45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		704E56E42782E18600E52E45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -119,15 +115,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		704B009E27FF2C95006B3E2D /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				704B009827FF2C8D006B3E2D /* TextFieldCell.xib */,
-				704B009727FF2C8D006B3E2D /* TextFieldCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		704CCE272707FEE800565CDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +161,6 @@
 		70C945DB26257A270074F829 /* diary-app */ = {
 			isa = PBXGroup;
 			children = (
-				704B009E27FF2C95006B3E2D /* Cell */,
 				704CCE272707FEE800565CDC /* Model */,
 				709F88D42625A18D0058DCA6 /* Contoroller */,
 				70C945DC26257A270074F829 /* AppDelegate.swift */,
@@ -330,7 +316,6 @@
 				70C945E926257A2C0074F829 /* LaunchScreen.storyboard in Resources */,
 				70C945E626257A2C0074F829 /* Assets.xcassets in Resources */,
 				70C945E426257A270074F829 /* Main.storyboard in Resources */,
-				704B009A27FF2C8D006B3E2D /* TextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +452,6 @@
 				70C945DF26257A270074F829 /* SceneDelegate.swift in Sources */,
 				708AD3932709D822002D5201 /* PostDiaryModel.swift in Sources */,
 				70E5DFDC27E39C2900271067 /* extension.swift in Sources */,
-				704B009927FF2C8D006B3E2D /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

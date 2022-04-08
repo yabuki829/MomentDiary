@@ -86,11 +86,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MomentDiary" id="i42-EG-FWb">
-                        <barButtonItem key="leftBarButtonItem" title="今までの画像" id="Tpa-e2-TPP">
-                            <connections>
-                                <segue destination="La2-fs-2rq" kind="show" id="VMS-6N-xe4"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="square.and.pencil" catalog="system" id="nfP-e5-PMo">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -118,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j0f-At-F20">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="118" id="k2z-Mk-SCy">
@@ -221,45 +216,46 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="akj-um-lBf">
-                                                    <rect key="frame" x="10" y="16" width="394" height="86"/>
+                                                    <rect key="frame" x="10" y="11" width="394" height="96"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="akj-um-lBf" firstAttribute="centerY" secondItem="PaK-qh-SCa" secondAttribute="centerY" id="JLX-8S-gdi"/>
                                                 <constraint firstAttribute="trailing" secondItem="akj-um-lBf" secondAttribute="trailing" constant="10" id="MUU-AA-8DM"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="akj-um-lBf" secondAttribute="bottom" constant="5" id="U5U-MC-olZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="akj-um-lBf" secondAttribute="bottom" id="U5U-MC-olZ"/>
                                                 <constraint firstItem="akj-um-lBf" firstAttribute="centerX" secondItem="PaK-qh-SCa" secondAttribute="centerX" id="gHg-tR-qLV"/>
                                                 <constraint firstItem="akj-um-lBf" firstAttribute="leading" secondItem="PaK-qh-SCa" secondAttribute="leading" constant="10" id="onr-fA-UqG"/>
-                                                <constraint firstItem="akj-um-lBf" firstAttribute="top" secondItem="PaK-qh-SCa" secondAttribute="topMargin" constant="5" id="p7M-K3-mYf"/>
+                                                <constraint firstItem="akj-um-lBf" firstAttribute="top" secondItem="PaK-qh-SCa" secondAttribute="topMargin" id="p7M-K3-mYf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nR1-Xm-Ucg">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nR1-Xm-Ucg">
                                 <rect key="frame" x="0.0" y="828" width="414" height="34"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oW-nl-Yxf">
-                                        <rect key="frame" x="0.0" y="0.0" width="379" height="34"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" systemColor="systemGray6Color"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardAppearance="light"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxo-ao-tLX">
-                                        <rect key="frame" x="379" y="0.0" width="35" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxo-ao-tLX">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="QeO-k3-Z6c"/>
                                         </constraints>
-                                        <state key="normal" title="画像">
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="photo.fill" catalog="system">
                                             <color key="titleColor" systemColor="linkColor"/>
                                         </state>
                                         <connections>
                                             <action selector="selectImage:" destination="NDj-dQ-rRq" eventType="touchUpInside" id="kmz-yA-K0O"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="入力してください" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="2oW-nl-Yxf">
+                                        <rect key="frame" x="40" y="0.0" width="374" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" systemColor="systemGray6Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="light"/>
+                                    </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="P2v-uJ-Twe"/>
@@ -274,14 +270,7 @@
                             <constraint firstItem="P2v-uJ-Twe" firstAttribute="trailing" secondItem="nR1-Xm-Ucg" secondAttribute="trailing" id="nXz-xc-XtK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MtV-fA-lYt" colorLabel="IBBuiltInLabel-Blue">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="refresh" id="2yu-Py-eRg">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="reverse:" destination="NDj-dQ-rRq" id="RH9-LM-aap"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="MtV-fA-lYt" colorLabel="IBBuiltInLabel-Blue"/>
                     <connections>
                         <outlet property="stackView" destination="nR1-Xm-Ucg" id="YWu-XK-2O0"/>
                         <outlet property="stackViewBottomConstraint" destination="Y7W-AE-YMp" id="gL3-sK-LoG"/>
@@ -321,6 +310,7 @@
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
+        <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

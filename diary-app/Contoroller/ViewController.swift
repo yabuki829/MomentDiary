@@ -18,12 +18,14 @@ class ViewController: UIViewController{
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var nadView: NADView!
     @IBOutlet weak var seachBar: UISearchBar!
-    var data = [[String]]()
-    var diaryModel = DiaryModel()
+    var data = [diary]()
+    var diaryModel = Diary()
     var isSeach = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print()
+      
         tableView.delegate = self
         tableView.dataSource = self
         seachBar.delegate = self
@@ -32,25 +34,21 @@ class ViewController: UIViewController{
         setNavBarBackgroundColor()
 //        addAD()
         setting()
+        print(diaryModel.read())
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         data = []
-        data = diaryModel.readDiaryDate()
+        data = diaryModel.read()
         tableView.reloadData()
     }
     
 
     //createDiaryという名前の方がいいかも
     @IBAction func diarytimeButton(_ sender: Any) {
-        let date = diaryModel.getDate()
-        //日記を作成する。一度作成されていたらアラートを出す
-        let doAlertCheck: Bool = diaryModel.saveDate(saveData: date)
-        
-        if doAlertCheck {
-            alreadyCreated()
-        }
+        diaryModel.create()
+        data = diaryModel.read()
         tableView.reloadData()
         
     }
@@ -134,10 +132,9 @@ class ViewController: UIViewController{
 
 extension ViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let diaryCount =  diaryModel.readDateData().count
+        let diaryCount =  diaryModel.read().count
         if isSeach {
             print("サーチモード")
-            print(data.count)
             return data.count
         }
         else{
@@ -153,15 +150,16 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "next") as! NextViewController
-        nextVC.timeString =  diaryModel.diaryTime[indexPath.row]
+        nextVC.diaryArray = data[indexPath.row]
+        nextVC.index = indexPath.row
         navigationController!.pushViewController(nextVC, animated: true)
-        
+
         isSeach = false
         seachBar.text = ""
         seachBar.searchTextField.resignFirstResponder()
-        tableView.deselectRow(at: indexPath, animated: true)
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -169,25 +167,18 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
         
         let DiaryTimelabel = cell.viewWithTag(1) as! UILabel
         let DiaryContentLabel = cell.viewWithTag(2) as! UILabel
-        DiaryContentLabel.text = ""
         
        
         
        
         //diaryTimeのindexpath.row番目でfilter
         if isSeach {
-            DiaryTimelabel.text = data[indexPath.row][0]
-            DiaryContentLabel.text = data[indexPath.row][1]
+            DiaryTimelabel.text = data[indexPath.row].created.covertString()
+            DiaryContentLabel.text = data[indexPath.row].diary![0].text
         }
         else{
-            let filterDiary = data.filter { ($0.first) ==  diaryModel.diaryTime[indexPath.row]}
-            DiaryTimelabel.text = diaryModel.diaryTime[indexPath.row]
-            if filterDiary.last?[1] == nil {
-                DiaryContentLabel.text = ""
-            }
-            
-            DiaryContentLabel.text = filterDiary.last?[1]
-           
+            DiaryTimelabel.text = data[indexPath.row].created.covertString()
+            DiaryContentLabel.text = data[indexPath.row].diary?.last?.text
         }
         return cell
       
@@ -195,7 +186,8 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            diaryModel.deleteDiary(index:indexPath.row )
+            diaryModel.deleteDiary(id: data[indexPath.row].id)
+            data = diaryModel.read()
             tableView.reloadData()
         }
     }
@@ -225,10 +217,10 @@ extension ViewController :UISearchBarDelegate{
         if searchText.count == 0{
             
             isSeach = false
-            data = diaryModel.readDiaryDate()
+            data = diaryModel.read()
         }
         else{
-            data = diaryModel.searchDiary(text: searchText)
+            data = diaryModel.search(text: searchText)
             isSeach = true
 
             

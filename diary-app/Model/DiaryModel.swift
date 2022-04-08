@@ -1,136 +1,104 @@
 import UIKit
 
-class DiaryModel{
+
+class Diary:diaryProtcol{
+
+    
+
+    
+    var diaryArray = [diary]()
+    
     let userDefaults = UserDefaults.standard
-    //日付が入ってる
-    var diaryTime = [String]()
-    var isTurn = false
-    var data = [[String]]()
     
-    func getDate() ->String{
-        let locale = Locale.current
-        let localeId = locale.identifier
-        if localeId == "ja_US"{
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ja_JP")
-            formatter.dateFormat = "yyy年MM月dd日(eee)"
-            let date = formatter.string(from: NSDate() as Date)
-            return date
-        }
-        else if localeId == "ja_JP"{
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ja_JP")
-            formatter.dateFormat = "yyy年MM月dd日(eee)"
-            let date = formatter.string(from: NSDate() as Date)
-            return date
-        }
-        else{
-            return convertDateToString(date: Date())
-        }
+    func save(data: [diary]) {
+        userDefaults.setCodable(data, forKey: "dairy")
     }
-    func convertDateToString(date:Date) -> String{
-        let locale = Locale.current
-        let localeId = locale.identifier
-        print(localeId)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        dateFormatter.timeStyle = .none
-        
-        // カレンダー設定（グレゴリオ暦固定）
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-
-        // 変換
-        let str = dateFormatter.string(from: date)
-        // 結果表示
-        return str
+    
+    func create() {
+        diaryArray = read()
+        let a = diary(id: generateID(5), created: Date(), diary: [diaryData]())
+        diaryArray.append(a)
+        save(data: diaryArray)
     }
-    func convertShortString(date:Date) -> String{
-        let locale = Locale.current
-        let localeId = locale.identifier
-        print(localeId)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
-        
-        // カレンダー設定（グレゴリオ暦固定）
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-
-        // 変換
-        let str = dateFormatter.string(from: date)
-        // 結果表示
-        return str
+    
+    func read() -> [diary] {
+        if let data:[diary] = userDefaults.codable(forKey: "dairy"){
+            diaryArray = data
+        }
+        return diaryArray
     }
-    //日付の追加
-    func saveDate(saveData:String) -> Bool{
-        for i in 0..<diaryTime.count{
-            if diaryTime[i] == saveData{
-                return true
+  
+    
+    
+    func deleteDiary(id: String) {
+        diaryArray = read()
+        for i in 0..<diaryArray.count{
+            if id == diaryArray[i].id{
+                diaryArray.remove(at: i)
+                save(data: diaryArray)
+                break
             }
         }
-        if isTurn{
-            diaryTime.insert(saveData, at: 0)
-            userDefaults.set(diaryTime, forKey: "diaryList")
-        }
-        else{
-            diaryTime.append(saveData)
-            userDefaults.set(diaryTime, forKey: "diaryList")
-        }
-       
-        return false
-    }
-
-//    日付の読み取り
-    func readDateData() -> [String]{
-        if let diaryList = userDefaults.array(forKey: "diaryList") as? [String] {
-            diaryTime = []
-            diaryTime.append(contentsOf: diaryList)
-            print("diarytime",diaryList)
-        }
-        return diaryTime
     }
     
-    
-//    日記の読み取り
-    func readDiaryDate() -> [[String]] {
-        if let TimeAndDiaryList = userDefaults.array(forKey: "TimeAndDiaryList") as? [[String]]{
-            data = []
-            data.append(contentsOf: TimeAndDiaryList)
+    func deleteText(id: String, index: Int) {
+        diaryArray = read()
+        for i in 0..<diaryArray[index].diary!.count{
+            if id == diaryArray[index].diary![i].id{
+                save(data: diaryArray)
+                break
+            }
+        }
+    }
+    func search(text: String) -> [diary] {
+        diaryArray = read()
+        var searchArray = [diary]()
+        
+        for i in 0..<diaryArray.count{
+            for j in 0..<diaryArray[i].diary!.count{
+                if diaryArray[i].diary![j].text.lowercased().contains(text){
+                    
+                    let data = diaryArray[i].diary![j]
+                    
+                    searchArray.append(diary(id:diaryArray[i].id, created: diaryArray[i].created, diary:[diaryData(id:data.id , date:data.date , text: data.text, image: data.image)])
+                
+                )}
+            }
             
-           return data
         }
-        return data
+        return searchArray
     }
-    //日記の削除機能　一日の日記を削除する
-    //3月22日の日記を削除する
-    func deleteDiary(index:Int){
-        let deleteData = data.filter { ($0.first) ==  diaryTime[index]}
-      
-        data = data.filter { !deleteData.contains($0) }
-        diaryTime.remove(at: index)
-        userDefaults.set(data, forKey: "TimeAndDiaryList")
-        userDefaults.set(diaryTime, forKey: "diaryList")
-    }
-    
-    
-    //日記の検索機能
-    func searchDiary(text:String) -> [[String]]{
-        data = readDiaryDate()
-        var filterDiary = [[String]]()
-        print(text,"と同じものを探します")
-        for i in 0..<data.count{
-            if data[i][1].lowercased().contains(text){
-                filterDiary.append(data[i])
+    func filter(date: Date) -> [diary] {
+        let day = dateFormat(date: date)
+        diaryArray = read()
+        var fileterArray = [diary]()
+        
+        for i in 0..<diaryArray.count{
+            if day == dateFormat(date: diaryArray[i].created){
+                fileterArray.append(diaryArray[i])
             }
         }
-        return filterDiary
+        return fileterArray
+       
     }
+    private func dateFormat(date: Date) -> String {
+        let format = DateFormatter()
+        format.dateStyle = .long
+        format.timeStyle = .none
+        return format.string(from: date)
+       
+     }
     
+    func generateID(_ length: Int) -> String {
+               let string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+               var randomString = ""
+               for _ in 0 ..< length {
+                   randomString += String(string.randomElement()!)
+               }
+               return randomString
+    }
     
 }
-
-
 
 /*
  
@@ -156,3 +124,28 @@ class DiaryModel{
     　今後扱いやすいようにData型で実装し追加機能の画像投稿機能を加えて別のアプリとしてリリースしようと思う。
  
  */
+
+
+struct diary:Codable,Equatable{
+    let id:String
+    let created:Date
+    var diary:[diaryData]?
+}
+struct diaryData:Codable,Equatable{
+    let id:String
+    let date:Date
+    let text:String
+    let image:Data?
+}
+
+
+protocol diaryProtcol {
+    func read()->[diary]
+    func save(data:[diary])
+    func create()
+    func deleteText(id:String,index:Int)
+    func deleteDiary(id:String)
+    func search(text:String)->[diary]
+    func filter(date:Date)->[diary]
+    
+}
