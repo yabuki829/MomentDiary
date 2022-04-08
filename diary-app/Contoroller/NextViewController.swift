@@ -15,11 +15,16 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var nadView: NADView!
+    @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     //日付
     var timeString = String()
     let postModel = PostDiaryModel()
     let photo = Photo()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -30,14 +35,28 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         setNavBarBackgroundColor()
         postModel.readDiary()
         postModel.filterDiary(date: timeString)
-        setting()
-        addAD()
+//        addAD()
+        tableView.keyboardDismissMode = .none
       
+       
+        tableView.contentInsetAdjustmentBehavior = .never
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-          self.view.endEditing(true)
-        textField.resignFirstResponder()
-      }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(
+          self,
+          selector:#selector(keyboardWillShow(_:)),
+          name: UIResponder.keyboardWillShowNotification,
+          object: nil
+        )
+        NotificationCenter.default.addObserver(
+          self,
+          selector: #selector(keyboardWillHide(_:)),
+          name: UIResponder.keyboardWillHideNotification,
+          object: nil
+        )
+    }
     override func didReceiveMemoryWarning() {
            super.didReceiveMemoryWarning()
        }
@@ -69,25 +88,33 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
                 NSAttributedString.Key.font: UIFont(name: "Times New Roman", size: 15)!]
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         }
-    func setting(){
-        let toolbar = UIToolbar()
-        //完了ボタンを右寄せにする為に、左側を埋めるスペース作成
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                          target: nil,
-                                          action: nil)
-        let done = UIBarButtonItem(title: "Done",
-                                         style: .done,
-                                         target: self,
-                                         action: #selector(didTapDoneButton))
-        //toolbarのitemsに作成したスペースと完了ボタンを入れる。実際にも左から順に表示される。
-        toolbar.items = [space, done]
-        toolbar.sizeToFit()
-        textField.inputAccessoryView = toolbar
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+      
+            let info = notification.userInfo!
+            let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                self.stackViewBottomConstraint.constant = keyboardFrame.size.height - self.stackView.frame.size.height
+                self.tableViewBottomConstraint.constant = keyboardFrame.size.height
+               
+                
+            })
+        
     }
+ 
+    @objc private func keyboardWillHide(_ notification: Notification) {
+     //キーボードが閉じたときの処理
+        stackViewBottomConstraint.constant = 0
+        tableViewBottomConstraint.constant = 0
+    }
+
+
+        
     @objc func didTapDoneButton() {
         textField.resignFirstResponder()
      }
+    
     func deleteAlert(){
         let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok", style: .cancel, handler: { (action) -> Void in
@@ -119,6 +146,7 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
         let time = postModel.getPostTime()
         postModel.postDiary(time: time, date: timeString, diary: textField.text!)
         textField.text = ""
+        
         tableView.reloadData()
         
         return true
@@ -148,7 +176,7 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
     //セルが選択されたら
     func tableView(_ tableView: UITableView,didSelectRowAt indexPath: IndexPath) {
             self.view.endEditing(true)
-            textField.resignFirstResponder()
+//            textField.resignFirstResponder()
             tableView.deselectRow(at: indexPath, animated: true)
         if postModel.filterDiaryArray[indexPath.row][2] == "画像"{
             print("画像")

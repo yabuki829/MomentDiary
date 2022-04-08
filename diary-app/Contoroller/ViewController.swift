@@ -30,7 +30,7 @@ class ViewController: UIViewController{
         seachBar.setShowsCancelButton(false, animated: true)
         tableView.layer.cornerRadius = 10
         setNavBarBackgroundColor()
-        addAD()
+//        addAD()
         setting()
     }
     
