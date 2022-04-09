@@ -1,11 +1,18 @@
 import UIKit
 
+protocol diaryProtcol {
+    func read()->[diary]
+    func save(data:[diary])
+    func create()
+    func deleteText(id:String,index:Int)
+    func deleteDiary(id:String)
+    func search(text:String)->[diary]
+    func filter(date:Date)->[diary]
+    
+}
 
 class Diary:diaryProtcol{
 
-    
-
-    
     var diaryArray = [diary]()
     
     let userDefaults = UserDefaults.standard
@@ -139,13 +146,3 @@ struct diaryData:Codable,Equatable{
 }
 
 
-protocol diaryProtcol {
-    func read()->[diary]
-    func save(data:[diary])
-    func create()
-    func deleteText(id:String,index:Int)
-    func deleteDiary(id:String)
-    func search(text:String)->[diary]
-    func filter(date:Date)->[diary]
-    
-}

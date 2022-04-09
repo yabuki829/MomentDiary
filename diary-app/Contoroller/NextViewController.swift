@@ -55,6 +55,25 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
           object: nil
         )
     }
+    @objc func keyboardWillShow(_ notification: Notification) {
+      
+            let info = notification.userInfo!
+            let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+
+        UIView.animate(withDuration: 1.0, animations: { () -> Void in
+                self.stackViewBottomConstraint.constant = keyboardFrame.size.height - self.stackView.frame.size.height
+                self.tableViewBottomConstraint.constant = keyboardFrame.size.height
+               
+                
+            })
+        
+    }
+ 
+    @objc private func keyboardWillHide(_ notification: Notification) {
+     //キーボードが閉じたときの処理
+        stackViewBottomConstraint.constant = 0
+        tableViewBottomConstraint.constant = 0
+    }
     override func didReceiveMemoryWarning() {
            super.didReceiveMemoryWarning()
     }
@@ -82,25 +101,7 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
-      
-            let info = notification.userInfo!
-            let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 
-            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                self.stackViewBottomConstraint.constant = keyboardFrame.size.height - self.stackView.frame.size.height
-                self.tableViewBottomConstraint.constant = keyboardFrame.size.height
-               
-                
-            })
-        
-    }
- 
-    @objc private func keyboardWillHide(_ notification: Notification) {
-     //キーボードが閉じたときの処理
-        stackViewBottomConstraint.constant = 0
-        tableViewBottomConstraint.constant = 0
-    }
     func deleteAlert(){
         let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok", style: .cancel, handler: { (action) -> Void in

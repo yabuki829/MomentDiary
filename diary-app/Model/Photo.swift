@@ -39,30 +39,11 @@ class Photo {
                 print("defalts")
            }
        }
-    func saveImage(image:UIImage){
-        let data = image.pngData() as Data?
-        print("何バイト？　",data!.count)
-    
-            if let imageData = data {
-                imageArray.append(imageData)
-                userdefalts.set(imageArray, forKey: "image")
-            }
-    }
+ 
     func convert_data(_ image:UIImage) -> Data{
         let data = image.pngData() as Data?
         
         return data!
     }
-    func save(array:[Data]){
-        userdefalts.set(array, forKey: "image")
-    }
-    func getImage() -> [Data]{
-        if let image = userdefalts.object(forKey: "image"){
-            imageArray = image as! [Data]
-            return imageArray
-        }
-        return [Data]()
-    }
-  
 }
 

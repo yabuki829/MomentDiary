@@ -32,7 +32,7 @@ class ViewController: UIViewController{
         seachBar.setShowsCancelButton(false, animated: true)
         tableView.layer.cornerRadius = 10
         setNavBarBackgroundColor()
-//        addAD()
+        addAD()
         setting()
         print(diaryModel.read())
     }
@@ -67,31 +67,8 @@ class ViewController: UIViewController{
           
         }
 
-    func alreadyCreated() {
-        let alert = UIAlertController(title: "Report", message: "You can only post once a day", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "ok", style: .cancel, handler: { (action) -> Void in
-        })
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func convertDateToString(date:Date) -> String{
-        let locale = Locale.current
-        let localeId = locale.identifier
-        print(localeId)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .short
-        
-        // カレンダー設定（グレゴリオ暦固定）
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
 
-        // 変換
-        let str = dateFormatter.string(from: date)
-        // 結果表示
-        return str
-    }
+    
    
     func setting(){
         
