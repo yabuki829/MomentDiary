@@ -28,16 +28,9 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        textField.delegate = self
-        navigationController?.delegate = self
-        self.navigationItem.title =  diaryArray.created.covertString()
+        setting()
         setNavBarBackgroundColor()
-        tableView.keyboardDismissMode = .none
-        tableView.contentInsetAdjustmentBehavior = .never
-        textField.becomeFirstResponder()
-        textField.borderStyle = .roundedRect
+        
     }
     
     
@@ -89,6 +82,21 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
                 imagePicker.allowsEditing = true
                 self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+    func setting(){
+        tableView.keyboardDismissMode = .none
+        tableView.contentInsetAdjustmentBehavior = .never
+     
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        textField.delegate = self
+        textField.becomeFirstResponder()
+        textField.borderStyle = .roundedRect
+        
+        navigationController?.delegate = self
+        self.navigationItem.title =  diaryArray.created.covertString()
     }
     func setNavBarBackgroundColor(){
         setStatusBarBackgroundColor(.salmon())

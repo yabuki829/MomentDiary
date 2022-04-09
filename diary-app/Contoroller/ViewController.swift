@@ -24,7 +24,6 @@ class ViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print()
       
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,7 +33,6 @@ class ViewController: UIViewController{
         setNavBarBackgroundColor()
         addAD()
         setting()
-        print(diaryModel.read())
     }
     
     override func viewWillAppear(_ animated: Bool) {
