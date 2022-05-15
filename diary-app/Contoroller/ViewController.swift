@@ -18,7 +18,7 @@ class ViewController: UIViewController{
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var nadView: NADView!
     @IBOutlet weak var seachBar: UISearchBar!
-    var data = [diary]()
+    var data = [diaryV2]()
     var diaryModel = Diary()
     var isSeach = false
     
@@ -31,14 +31,16 @@ class ViewController: UIViewController{
         seachBar.setShowsCancelButton(false, animated: true)
         tableView.layer.cornerRadius = 10
         setNavBarBackgroundColor()
-        addAD()
-        setting()
+//        addAD()
+//        setting()
+        changeDiaryData()
+       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         data = []
-        data = diaryModel.read()
+        data = diaryModel.readV2()
         tableView.reloadData()
     }
     
@@ -46,13 +48,36 @@ class ViewController: UIViewController{
     //createDiaryという名前の方がいいかも
     @IBAction func diarytimeButton(_ sender: Any) {
         diaryModel.create()
-        data = diaryModel.read()
+        data = diaryModel.readV2()
         tableView.reloadData()
-        
+        if data.count > 0 {
+            let indexPath = IndexPath(row: data.count - 1, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+       
     }
     
     
-    
+    func changeDiaryData(){
+        //構造が古いやつだったら変更する
+        let data = diaryModel.read()
+        print("データ構造の変更をします")
+        if data.isEmpty == false{
+            print("データ構造の変更を開始します")
+            var newData = [diaryV2]()
+            for i in 0..<data.count{
+                print("変更中",i+1,"回目")
+                let a = diaryV2(id:data[i].id, created: data[i].created, title: "", diary: data[i].diary)
+                newData.append(a)
+            }
+            
+            diaryModel.save(data: newData)
+            self.data = newData
+            tableView.reloadData()
+            print("終了しました。")
+            
+        }
+    }
 
     func setNavBarBackgroundColor(){
         setStatusBarBackgroundColor(.salmon())
@@ -107,7 +132,7 @@ class ViewController: UIViewController{
 
 extension ViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let diaryCount =  diaryModel.read().count
+        let diaryCount =  diaryModel.readV2().count
         if isSeach {
             print("サーチモード")
             return data.count
@@ -127,7 +152,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "next") as! NextViewController
-        nextVC.diaryArray = data[indexPath.row]
+        nextVC.diarydata = data[indexPath.row]
         nextVC.index = indexPath.row
         navigationController!.pushViewController(nextVC, animated: true)
 
@@ -139,21 +164,28 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        print(indexPath.row)
         let DiaryTimelabel = cell.viewWithTag(1) as! UILabel
         let DiaryContentLabel = cell.viewWithTag(2) as! UILabel
-        
        
         
-       
-        //diaryTimeのindexpath.row番目でfilter
         if isSeach {
             DiaryTimelabel.text = data[indexPath.row].created.covertString()
             DiaryContentLabel.text = data[indexPath.row].diary![0].text
         }
         else{
+            
             DiaryTimelabel.text = data[indexPath.row].created.covertString()
-            DiaryContentLabel.text = data[indexPath.row].diary?.last?.text
+            
+            if data[indexPath.row].title == "" {
+                DiaryContentLabel.text = data[indexPath.row].diary?.last?.text
+            }
+            else{
+                DiaryContentLabel.text = data[indexPath.row].title
+            }
+           
+
+           
         }
         return cell
       
@@ -162,7 +194,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource{
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
             diaryModel.deleteDiary(id: data[indexPath.row].id)
-            data = diaryModel.read()
+            data = diaryModel.readV2()
             tableView.reloadData()
         }
     }
@@ -192,7 +224,7 @@ extension ViewController :UISearchBarDelegate{
         if searchText.count == 0{
             
             isSeach = false
-            data = diaryModel.read()
+            data = diaryModel.readV2()
         }
         else{
             data = diaryModel.search(text: searchText)

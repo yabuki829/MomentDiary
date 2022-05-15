@@ -23,14 +23,21 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
     var timeString = String()
     let diaryModel = Diary()
     let photo = Photo()
-    var diaryArray = diary(id: String(), created: Date(), diary: [diaryData]())
+    var diarydata = diaryV2(id: "", created: Date(), title: "", diary: nil)
     var index = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setting()
         setNavBarBackgroundColor()
-        
+        //diaryDataのタイトルを表示する
+        if diarydata.title == ""{
+            navigationItem.title  = diarydata.created.covertString()
+        }
+        else{
+            navigationItem.title = diarydata.title
+        }
+       
     }
     
     
@@ -55,7 +62,7 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
 
         UIView.animate(withDuration: 1.0, animations: { () -> Void in
                 self.stackViewBottomConstraint.constant = keyboardFrame.size.height - self.stackView.frame.size.height
-                self.tableViewBottomConstraint.constant = keyboardFrame.size.height
+               
                
                 
             })
@@ -71,6 +78,9 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
            super.didReceiveMemoryWarning()
     }
     
+    @IBAction func setDiaryTitle(_ sender: Any) {
+       alert()
+    }
     @IBAction func selectImage(_ sender: Any) {
         //画像ライブラリーを開く
         
@@ -96,9 +106,10 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
         textField.borderStyle = .roundedRect
         
         navigationController?.delegate = self
-        self.navigationItem.title =  diaryArray.created.covertString()
+        self.navigationItem.title =  diarydata.created.covertString()
     }
     func setNavBarBackgroundColor(){
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setStatusBarBackgroundColor(.salmon())
         self.navigationController?.navigationBar.barTintColor = .salmon()
             self.navigationController?.navigationBar.tintColor = .white
@@ -121,16 +132,16 @@ class NextViewController: UIViewController,UITextFieldDelegate ,UINavigationCont
 
 extension NextViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return diaryArray.diary!.count
+        return diarydata.diary!.count
 
     }
   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let aa = diaryArray.diary![indexPath.row].text
-        if aa.utf16.count > 20  || diaryArray.diary![indexPath.row].image!.isEmpty == false {
+        let aa = diarydata.diary![indexPath.row].text
+        if aa.utf16.count > 20  || diarydata.diary![indexPath.row].image!.isEmpty == false {
             return  UITableView.automaticDimension
         }
-        return  view.frame.height/12
+        return UITableView.automaticDimension
     }
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -139,44 +150,66 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
             return true
         }
         let data = diaryData(id: diaryModel.generateID(5), date: Date(), text: textField.text!, image: Data())
-        diaryArray.diary!.append(data)
+        diarydata.diary!.append(data)
         
-        var array = diaryModel.read()
-        array[index].diary = diaryArray.diary
+        var array = diaryModel.readV2()
+        array[index].diary = diarydata.diary
         diaryModel.save(data: array)
         
         textField.text = ""
         tableView.reloadData()
         
+        let indexPath = IndexPath(row: diarydata.diary!.count - 1, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        
         return true
     }
     //セルを作成
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if diaryArray.diary![indexPath.row].image!.isEmpty == false{
-            print("画像")
+        if diarydata.diary![indexPath.row].image!.isEmpty == false{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.selectionStyle = .none
             let imageView = cell.viewWithTag(1) as! UIImageView
            
-            let image_data = diaryArray.diary![indexPath.row].image
+            let image_data = diarydata.diary![indexPath.row].image
             imageView.image = UIImage(data: image_data!)?.resized(toWidth: view.bounds.size.width)
             return cell
         }
         else{
-            print(diaryArray.diary![indexPath.row].text)
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath)
             cell.selectionStyle = .none
             let timeCelllabel = cell.viewWithTag(3) as! UILabel
             let diaryTextlabel = cell.viewWithTag(2) as! UILabel
            
-            diaryTextlabel.text = diaryArray.diary![indexPath.row].text
-            timeCelllabel.text = diaryArray.diary![indexPath.row].date.convert_short()
-            return cell
+            if indexPath.row == 0 {
+                
+                
+                diaryTextlabel.text = diarydata.diary![indexPath.row].text
+                timeCelllabel.text = diarydata.diary![indexPath.row].date.convert_short()
+                return cell
+            }
+            else{
+                let timeA = diarydata.diary![indexPath.row].date.convert_short()
+                let timeB = diarydata.diary![indexPath.row - 1].date.convert_short()
+                if timeA == timeB{
+                    
+                    //一個前の投稿時間と同じなら時間を表示しない
+                    diaryTextlabel.text = diarydata.diary![indexPath.row].text
+                    timeCelllabel.text = ""
+                    return cell
+                }
+                else{
+                    diaryTextlabel.text = diarydata.diary![indexPath.row].text
+                    timeCelllabel.text = diarydata.diary![indexPath.row].date.convert_short()
+                    return cell
+                }
+                
+            }
+            
         }
 
         
     }
-    //セルが選択されたら
     func tableView(_ tableView: UITableView,didSelectRowAt indexPath: IndexPath) {
             self.view.endEditing(true)
             textField.resignFirstResponder()
@@ -185,13 +218,49 @@ extension NextViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            diaryArray.diary!.remove(at: indexPath.row)
-            var data = diaryModel.read()
-            data[index].diary = diaryArray.diary
+            diarydata.diary!.remove(at: indexPath.row)
+            var data = diaryModel.readV2()
+            data[index].diary = diarydata.diary
             diaryModel.save(data: data)
             tableView.reloadData()
            
         }
+    }
+    
+    func alert(){
+        let alert = UIAlertController(title: "日記のタイトルを決める", message: "", preferredStyle: .alert)
+                var alertTextField: UITextField?
+                alert.addTextField { (textField) in
+                    alertTextField = textField
+                    let text =  self.diarydata.title
+                    alertTextField?.text = text
+                    textField.placeholder = "タイトル"
+                 }
+             
+                
+                 
+            let selectAction = UIAlertAction(title: "OK", style: .default, handler: { [self] _ in
+                    
+                var array = diaryModel.readV2()
+                array[index].title = (alertTextField?.text)!
+                navigationItem.title = alertTextField?.text
+                if alertTextField?.text == ""{
+                    navigationItem.title = diarydata.created.covertString()
+                    array[index].title = ""
+                }
+                
+                
+            })
+            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: { [self] _ in
+                navigationItem.title = diarydata.created.covertString()
+                var array = diaryModel.readV2()
+                array[index].title = ""
+            })
+
+                 alert.addAction(selectAction)
+                 alert.addAction(cancelAction)
+
+                 present(alert, animated: true)
     }
 }
 
@@ -217,17 +286,15 @@ extension NextViewController:UIImagePickerControllerDelegate{
             
             if textField.text == ""{
                 let a = diaryData(id: diaryModel.generateID(8), date: Date(), text: "画像", image: photo.convert_data(image))
-                diaryArray.diary?.append(a)
+                diarydata.diary?.append(a)
             }
             else{
                 let a = diaryData(id: diaryModel.generateID(8), date: Date(), text: textField.text ?? "画像", image: photo.convert_data(image))
-                diaryArray.diary?.append(a)
+                diarydata.diary?.append(a)
             }
            
-           
-
-            var array = diaryModel.read()
-            array[index].diary = diaryArray.diary
+            var array = diaryModel.readV2()
+            array[index].diary = diarydata.diary
             diaryModel.save(data: array)
             
             textField.text = ""
@@ -241,7 +308,6 @@ extension NextViewController:UIImagePickerControllerDelegate{
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("キャンセル")
         picker.dismiss(animated: true, completion:nil )
     }
 }

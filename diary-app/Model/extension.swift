@@ -232,14 +232,14 @@ extension Date{
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja_JP")
         formatter.dateFormat = "yyy年MM月dd日(eee)"
-        let date = formatter.string(from: NSDate() as Date)
+        let date = formatter.string(from: self)
         return date
     }
     func convert_short() -> String{
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja_JP")
-        formatter.dateFormat = "HH:MM"
-        let date = formatter.string(from: NSDate() as Date)
+        formatter.dateFormat = "HH:mm"
+        let date = formatter.string(from:self)
         return date
     }
 }
@@ -256,4 +256,27 @@ extension UITextField {
         addSubview(underline)
         bringSubviewToFront(underline)
     }
+}
+
+
+extension UILabel {
+
+  /// 行数を返す
+  func lineNumber() -> Int {
+    let oneLineRect  =  "a".boundingRect(
+      with: self.bounds.size,
+      options: .usesLineFragmentOrigin,
+      attributes: [NSAttributedString.Key.font: self.font ?? UIFont()],
+      context: nil
+    )
+    let boundingRect = (self.text ?? "").boundingRect(
+      with: self.bounds.size,
+      options: .usesLineFragmentOrigin,
+      attributes: [NSAttributedString.Key.font: self.font ?? UIFont()],
+      context: nil
+    )
+
+    return Int(boundingRect.height / oneLineRect.height)
+  }
+
 }

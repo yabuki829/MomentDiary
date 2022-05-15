@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		308A7A0ECABFF396224F6C08 /* Pods_diary_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D5E26D548E5AB62DA5F157 /* Pods_diary_appTests.framework */; };
 		704CCE292707FF0600565CDC /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704CCE282707FF0600565CDC /* DiaryModel.swift */; };
+		7071081E2830A85B0033C695 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071081D2830A85B0033C695 /* Diary.swift */; };
 		709F88D62625A1B30058DCA6 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709F88D52625A1B30058DCA6 /* NextViewController.swift */; };
 		70BBE34427E97B2300C9BA09 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BBE34327E97B2300C9BA09 /* Photo.swift */; };
 		70C945DD26257A270074F829 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C945DC26257A270074F829 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		704E56E32782E18600E52E45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		704E56E42782E18600E52E45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7062E6B301E03B09A8FA14FE /* Pods-diary-app-diary-appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diary-app-diary-appUITests.debug.xcconfig"; path = "Target Support Files/Pods-diary-app-diary-appUITests/Pods-diary-app-diary-appUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7071081D2830A85B0033C695 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		709F88D52625A1B30058DCA6 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		70BBE34327E97B2300C9BA09 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		70C945D926257A270074F829 /* diary-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "diary-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 				704CCE282707FF0600565CDC /* DiaryModel.swift */,
 				70E5DFDB27E39C2900271067 /* extension.swift */,
 				70BBE34327E97B2300C9BA09 /* Photo.swift */,
+				7071081D2830A85B0033C695 /* Diary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				704CCE292707FF0600565CDC /* DiaryModel.swift in Sources */,
 				70C945DF26257A270074F829 /* SceneDelegate.swift in Sources */,
 				70E5DFDC27E39C2900271067 /* extension.swift in Sources */,
+				7071081E2830A85B0033C695 /* Diary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,7 +629,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.62;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YA5HXFT63V;
 				INFOPLIST_FILE = "diary-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -633,7 +637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.62;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.syoyabu.diary-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -648,7 +652,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.62;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YA5HXFT63V;
 				INFOPLIST_FILE = "diary-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -656,7 +660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.62;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.syoyabu.diary-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

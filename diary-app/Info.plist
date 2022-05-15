@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>画像の使用</string>
+	<string>日記への画像を投稿するのに使用します</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>画像の使用</string>
+	<string>日記への画像を投稿するのに使用します</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
